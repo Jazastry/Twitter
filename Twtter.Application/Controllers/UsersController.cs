@@ -37,13 +37,14 @@ namespace Twtter.Application.Controllers
                     Id = t.Id,
                     Title = t.Title,
                     Text = t.Text,
-                    UserName = t.User.UserName
+                    AuthorName = a.UserName,
+                    AuthorId = a.Id
                 })).ToList();
 
             
             
 
-            return this.View(tweets[0]);
+            return this.View(tweets[0].ToList());
         }
 
         // GET: User

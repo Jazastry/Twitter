@@ -54,6 +54,37 @@ namespace Twitter.Data.Migrations
                 };
                 //ivo@piskov.net :::::  CV SEMINAR  ::::::::::::::
                 context.Tweets.Add(twTwo);
+
+                Tweet twThree = new Tweet()
+                {
+                    User = three,
+                    Text = "4 tweet text",
+                    Title = "Tweet Three",
+                };
+                context.Tweets.Add(twThree);
+                Tweet twFour = new Tweet()
+                {
+                    User = one,
+                    Text = "5 tweet text",
+                    Title = "Tweet One",
+                };
+                context.Tweets.Add(twFour);
+
+                Tweet twFive = new Tweet()
+                {
+                    User = two,
+                    Text = "6 tweet text",
+                    Title = "Tweet Two",
+                };
+                context.Tweets.Add(twFive);
+                Tweet twSix = new Tweet()
+                {
+                    User = three,
+                    Text = "7 tweet text",
+                    Title = "Tweet Three",
+                };
+                context.Tweets.Add(twSix);
+
                 Follow folowOne = new Follow()
                 {
                     Author = one,
@@ -83,13 +114,13 @@ namespace Twitter.Data.Migrations
                     Author = three,
                     Follower = one
                 };
-                context.Follows.Add(folowThree);
+                context.Follows.Add(folowFive);
                 Follow folowSix = new Follow()
                 {
                     Author = three,
                     Follower = two
                 };
-                context.Follows.Add(folowFour);
+                context.Follows.Add(folowSix);
 
                 context.SaveChanges();
             }

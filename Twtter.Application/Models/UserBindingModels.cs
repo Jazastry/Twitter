@@ -7,16 +7,10 @@ namespace Twtter.Application.Models
 {
     using Twitter.Models;
 
-    public class TweetOutputModel
+    public class UserTweetsOutputModel
     {
-        public int Id { get; set; }
-
-        public string Title { get; set; }
-
-        public string Text { get; set; }
-
         public string AuthorId { get; set; }
-
-        public string AuthorName { get; set; }
+        public string AuthorUserName { get; set; }
+        public IEnumerable<TweetOutputModel> Tweets { get; set; } 
     }
 }

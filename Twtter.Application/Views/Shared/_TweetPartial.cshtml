@@ -1,0 +1,13 @@
+﻿@using System.Collections.Generic
+@model List<Twtter.Application.Models.TweetOutputModel>
+
+@foreach (var item in Model)
+{
+    <div class="tweet co">
+        <input type="hidden" value="@item.Id" name="Id"/>
+        <input type="hidden" value="@item.AuthorId" name="AuthorId" />
+        <h3>@item.Title</h3>
+        <h4>@item.UserName</h4>
+        <p>@item.Text</p>
+    </div>
+}
