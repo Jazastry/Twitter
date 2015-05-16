@@ -1,0 +1,11 @@
+﻿@using System.Collections.Generic
+@model IEnumerable<Twtter.Application.Models.TweetOutputModel>   
+
+
+@foreach (var item in Model)
+{
+    <h2>@item.Title</h2>
+    <p>@item.UserName</p>
+    <p>@item.Text</p>
+}
+
