@@ -44,6 +44,7 @@ namespace Twitter.Data.Migrations
                     User = one,
                     Text = "First tweet text",
                     Title = "Tweet One",
+                    DateCreated = new DateTime(2014, 5, 4)
                 };
                 context.Tweets.Add(twOne);
                 Tweet twTwo = new Tweet()
@@ -51,6 +52,7 @@ namespace Twitter.Data.Migrations
                     User = two,
                     Text = "Second tweet text",
                     Title = "Tweet Two",
+                    DateCreated = new DateTime(2014, 5, 4)
                 };
                 //ivo@piskov.net :::::  CV SEMINAR  ::::::::::::::
                 context.Tweets.Add(twTwo);
@@ -60,6 +62,7 @@ namespace Twitter.Data.Migrations
                     User = three,
                     Text = "4 tweet text",
                     Title = "Tweet Three",
+                    DateCreated = new DateTime(2014, 5, 5)
                 };
                 context.Tweets.Add(twThree);
                 Tweet twFour = new Tweet()
@@ -67,6 +70,7 @@ namespace Twitter.Data.Migrations
                     User = one,
                     Text = "5 tweet text",
                     Title = "Tweet One",
+                    DateCreated = new DateTime(2014, 5, 6)
                 };
                 context.Tweets.Add(twFour);
 
@@ -75,6 +79,7 @@ namespace Twitter.Data.Migrations
                     User = two,
                     Text = "6 tweet text",
                     Title = "Tweet Two",
+                    DateCreated = new DateTime(2014, 5, 6)
                 };
                 context.Tweets.Add(twFive);
                 Tweet twSix = new Tweet()
@@ -82,6 +87,7 @@ namespace Twitter.Data.Migrations
                     User = three,
                     Text = "7 tweet text",
                     Title = "Tweet Three",
+                    DateCreated = new DateTime(2014, 5, 7)
                 };
                 context.Tweets.Add(twSix);
 

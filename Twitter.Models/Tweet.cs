@@ -21,6 +21,8 @@ namespace Twitter.Models
 
         public string Text { get; set; }
 
+        public DateTime DateCreated { get; set; }
+
         public string Url { get; set; }
 
         public string UserId { get; set; }

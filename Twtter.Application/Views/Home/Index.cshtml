@@ -1,19 +1,38 @@
-﻿{  
+﻿@using System.Collections.Generic
+@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Twtter.Application.Models.TweetOutputModel>
+
+@{  
     ViewBag.Title = "Home Page";
 }
 
 <h1>@ViewBag.Title</h1>
 
-<div class="jumbotron">
-    <h1>ASP.NET Fake Tweeter</h1>
-</div>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
 
-<div class="row">
-    <div class="col-md-4">
-       
+<div class="row col-lg-12">
+    <div class="row col-lg-12">
+        <div class="col-lg-4">
+            @Html.ActionLink("Author Name", "Index", new { sortOrder = ViewBag.AuthorSortParm })
+        </div>
+        <div class="col-lg-4">
+            @Html.ActionLink("Date Name", "Index", new { sortOrder = ViewBag.DateSortParm })
+        </div>
+        <div class="col-lg-4"></div>
     </div>
-    
-    <div class="col-md-4">
-       
-    </div>
+
+    @Html.Partial("_TweetPartial", Model.ToList())
+
 </div>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

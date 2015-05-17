@@ -32,19 +32,26 @@ namespace Twtter.Application.Controllers
                 .Include(u => u.Author.Tweets)
                 .Where(f => f.Follower.UserName == username)
                 .Select(t => t.Author)
-                .Select(a => a.Tweets.Select(t => new TweetOutputModel()
+                .Select(a => new UserTweetsOutputModel()
                 {
-                    Id = t.Id,
-                    Title = t.Title,
-                    Text = t.Text,
-                    AuthorName = a.UserName,
-                    AuthorId = a.Id
-                })).ToList();
+                    AuthorId = a.Id,
+                    AuthorUserName = a.UserName,
+                    Tweets = a.Tweets.Select(t => new TweetOutputModel()
+                    {
+                        Id = t.Id,
+                        Text = t.Text,
+                        Title = t.Title,
+                        AuthorId = a.Id,
+                        AuthorName = a.UserName
+                    }).ToList()
+                })
+                .OrderBy(a => a.AuthorUserName)
+                .ToList();
 
             
             
 
-            return this.View(tweets[0].ToList());
+            return this.View(tweets);
         }
 
         // GET: User

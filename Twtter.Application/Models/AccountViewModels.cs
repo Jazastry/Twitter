@@ -49,9 +49,8 @@ namespace Twtter.Application.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -69,7 +68,7 @@ namespace Twtter.Application.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [EmailAddress]
+        [Required]
         [Display(Name = "UseName")]
         public string UserName { get; set; }
 
