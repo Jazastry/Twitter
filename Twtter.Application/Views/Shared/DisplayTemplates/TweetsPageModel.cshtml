@@ -1,0 +1,40 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model Twtter.Application.Models.TweetsPageModel
+
+@{
+    ViewBag.Title = "Home Tweets Page";
+}
+
+<h1>@ViewBag.Title</h1>
+
+@using (Html.BeginForm(Model.ActionName, Model.ControllerName, FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("currentFilter", Model.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<div class="row col-lg-12">
+    <div class="row col-lg-12">
+        <div class="col-lg-6">
+            @*@//linkText, actionName, controllerName, routeValues, htmlAttributes*@
+            @Html.ActionLink("Author Name", Model.ActionName, Model.ControllerName, new { sortOrder = Model.AuthorSortParm }, null)
+        </div>
+        <div class="col-lg-6">
+            @Html.ActionLink("Date Name", Model.ActionName, Model.ControllerName, new { sortOrder = Model.DateSortParm }, null)
+        </div>
+    </div>
+    @{
+        var tweetsPaged = Model.Tweets.ToPagedList(Model.PageNumber, Model.PageSize);
+    }
+    @*    @Html.Partial("_TweetPartial", tweetsPaged)*@
+    @Html.DisplayForModel(Model.Tweets.ToPagedList(Model.PageNumber, Model.PageSize))
+
+</div>
+<br />
+Page @(Model.PageSize < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageSize
+
+@Html.PagedListPager(tweetsPaged, page => Url.Action(Model.ActionName, Model.ControllerName,
+    new { page, sortOrder = Model.CurrentSort, currentFilter = Model.CurrentFilter }))

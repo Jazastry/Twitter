@@ -10,7 +10,7 @@ namespace Twtter.Application.Controllers
     using Microsoft.AspNet.Identity;
     using Models;
     using Twitter.Data;
-
+    [Authorize]
     public class UsersController : BaseController
     {
         public UsersController()
@@ -25,33 +25,18 @@ namespace Twtter.Application.Controllers
 
         }
 
-        public ActionResult Index(string username)
+        public ActionResult Index(TweetsControllerModel model)
         {
-            var tweets = this.Data.Follows.All()
-                .Include(u => u.Author)
-                .Include(u => u.Author.Tweets)
-                .Where(f => f.Follower.UserName == username)
-                .Select(t => t.Author)
-                .Select(a => new UserTweetsOutputModel()
-                {
-                    AuthorId = a.Id,
-                    AuthorUserName = a.UserName,
-                    Tweets = a.Tweets.Select(t => new TweetOutputModel()
-                    {
-                        Id = t.Id,
-                        Text = t.Text,
-                        Title = t.Title,
-                        AuthorId = a.Id,
-                        AuthorName = a.UserName
-                    }).ToList()
-                })
-                .OrderBy(a => a.AuthorUserName)
-                .ToList();
+            this.ViewBag.User = this.User.Identity.GetUserName();
 
-            
-            
+            var tweetsControllerData = new TweetsControllerModel()
+            {
+                CurrentFilter = model.CurrentFilter,
+                SortOrder = model.SortOrder,
+                Page = model.Page
+            };
 
-            return this.View(tweets);
+            return View(tweetsControllerData);
         }
 
         // GET: User

@@ -1,0 +1,14 @@
+﻿@model Twtter.Application.Models.TweetOutputModel
+
+
+    <div class="tweet col-lg-12">
+        <input type="hidden" value="@Model.Id" name="Id"/>
+        <input type="hidden" value="@Model.AuthorId" name="AuthorId"/>
+        <h4>@Model.Title</h4>
+        <h4>By <span class="text-info">@Model.AuthorName</span></h4>
+        <div class="caption">
+            <p>@Model.Text</p>
+        </div>
+        <h4>@Model.DateCreated.ToString("dd-MM-yyyy")</h4>
+    </div>
+

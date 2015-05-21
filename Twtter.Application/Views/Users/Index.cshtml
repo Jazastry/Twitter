@@ -1,9 +1,17 @@
 ﻿@using System.Collections.Generic
-@model List<Twtter.Application.Models.UserTweetsOutputModel>
+@model Twtter.Application.Models.TweetsControllerModel
 
-@foreach (var author in Model)
-{
-   @Html.Partial("_TweetPartial", author.Tweets)
-}
+<h2>For users only hello @ViewBag.UserName</h2>
+
+@*-----------------actin  ,  comtroller*@
+@Html.Action("Index", "Tweets", new
+    {
+        sortOrder = Model.SortOrder,
+        currentFilter = Model.CurrentFilter,
+        page = Model.Page
+    });
+
+
+
 
 

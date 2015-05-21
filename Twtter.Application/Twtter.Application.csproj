@@ -67,6 +67,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -199,6 +200,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
+    <Compile Include="InputModels\TweetInputModel.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
@@ -206,6 +208,8 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TweetsControllerModel.cs" />
+    <Compile Include="Models\TweetsPageModel.cs" />
     <Compile Include="Models\TweetViewModels.cs" />
     <Compile Include="Models\UserBindingModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -270,13 +274,18 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Users\Profile.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Shared\_TweetPartial.cshtml" />
+    <Content Include="Views\Tweets\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TweetInTheMiddle.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TweetsPageModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TweetOutputModel.cshtml" />
+    <Content Include="Views\Users\Shared\_Layout.cshtml" />
+    <Content Include="Views\Tweets\Create.cshtml" />
+    <Content Include="Views\Users\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Notifications\" />
-    <Folder Include="Views\Tweets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
