@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{4A50BA50-A42
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5840D302-B9FD-4F04-A78C-14880BD7AF2C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalLibraries", "ExternalLibraries", "{AEA5171C-54ED-4D1E-A868-4E07865D68D9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twtter.Application", "Twtter.Application\Twtter.Application.csproj", "{11DE310D-7BA3-42AF-90D6-C2F7C6364FA7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProj", "TestProj\TestProj.csproj", "{7709D75A-D84A-4B7A-BF49-C09A7595B6C5}"

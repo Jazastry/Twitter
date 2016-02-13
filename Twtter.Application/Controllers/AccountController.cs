@@ -12,6 +12,10 @@ using Twtter.Application.Models;
 
 namespace Twtter.Application.Controllers
 {
+    using Constants;
+    using Microsoft.Ajax.Utilities;
+    using Microsoft.Owin.Security.Provider;
+    using Twitter.Data;
     using Twitter.Models;
 
     [Authorize]
@@ -40,6 +44,25 @@ namespace Twtter.Application.Controllers
             { 
                 _signInManager = value; 
             }
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult SearchUser(string username)
+        {
+            var user = this.Data.Users.All().Where(u => u.UserName == username).FirstOrDefault();
+            string message = "";
+            if (user != null && String.IsNullOrEmpty(username))
+            {
+                message = "Username " + username + " ocupied.";
+            }
+            else if (String.IsNullOrEmpty(username))
+            {
+                message = "Username " + username + " is free.";
+            }
+          
+            return this.Content(message);
         }
 
         public ApplicationUserManager UserManager

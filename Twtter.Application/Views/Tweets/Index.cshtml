@@ -1,11 +1,6 @@
 ﻿@using System.Web.Mvc.Html
-@using PagedList
 @using PagedList.Mvc
-@using Twtter.Application.Models
-
 @model Twtter.Application.Models.TweetsPageModel
-
-
 
 @{
     ViewBag.Title = "Home Tweets Page";
@@ -30,14 +25,13 @@
             @Html.ActionLink("Date Name", Model.ActionName, Model.ControllerName, new { sortOrder = Model.DateSortParm }, null)
         </div>
     </div>
-    @{
-        var tweetsPaged = Model.Tweets.ToPagedList(Model.PageNumber, Model.PageSize);
-    }
-    @Html.Partial("DisplayTemplates/TweetInTheMiddle", tweetsPaged)
-
+    <div class="tweets">
+@*        @Html.Partial("DisplayTemplates/TweetInTheMiddle", Model.Tweets)*@
+        @Html.DisplayFor(x => x.Tweets);
+    </div>
 </div>
 <br />
 Page @(Model.PageSize < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageSize
 
-@Html.PagedListPager(tweetsPaged, page => Url.Action(Model.ActionName, Model.ControllerName,
+@Html.PagedListPager(Model.Tweets, page => Url.Action(Model.ActionName, Model.ControllerName,
   new  { page, sortOrder = Model.CurrentSort, currentFilter = Model.CurrentFilter }))

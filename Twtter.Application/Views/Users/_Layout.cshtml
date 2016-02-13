@@ -6,7 +6,8 @@
     <title>@ViewBag.Title - Tweeter HOmework</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquerySinalaR")
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -23,6 +24,7 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li>@Html.ActionLink("Create Tweet", "Create", "Tweets")</li>
+@*                <li>@Html.ActionLink("All Tweet", "All", "Tweets")</li>*@
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
@@ -41,8 +43,6 @@
         </footer>
 
 </div>
-
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

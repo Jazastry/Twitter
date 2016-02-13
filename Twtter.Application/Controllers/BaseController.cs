@@ -11,24 +11,15 @@ namespace Twtter.Application.Controllers
     using Twitter.Data;
     using Twitter.Data.Repositories;
 
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
         private ITwitterData data;
 
-        public ITwitterData Data
-        {
-            get { return this.data; }
-        }
-
-        public BaseController()
-            : this(new TwitterData(new TwitterDbContext()))
-        {
-            
-        }
+        protected ITwitterData Data { get; private set; }
 
         public BaseController(ITwitterData data)
         {
-            this.data = data;
+            this.Data = data;
         }
 
         protected string GetBaseUrl()

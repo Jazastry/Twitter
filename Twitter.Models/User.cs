@@ -21,6 +21,8 @@
             this.Follows = new HashSet<Follow>();
         }
 
+        public string Picture { get; set; }
+
         public int ProfileId { get; set; }
 
         public virtual Profile UserProfile { get; set; }

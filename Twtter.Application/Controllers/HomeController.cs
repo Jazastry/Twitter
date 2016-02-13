@@ -8,17 +8,16 @@
 
     public class HomeController : BaseController
     {
-        private ITwitterData data;
 
         public HomeController()
-            : this(new TwitterData(new TwitterDbContext()))
+            : base(new TwitterData(new TwitterDbContext()))
         {
             
         }
 
-        public HomeController(ITwitterData data)
+        public HomeController(ITwitterData data) 
+            : base(data)
         {
-            this.data = data;
         }
 
 
@@ -29,28 +28,8 @@
                 return this.RedirectToAction("Index", "Users");
             }
 
-            var tweetsControllerData = new TweetsControllerModel()
-            {
-                CurrentFilter = model.CurrentFilter,
-                SortOrder = model.SortOrder,
-                Page = model.Page
-            };
 
-            return View(tweetsControllerData);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(model);
         }
     }
 }

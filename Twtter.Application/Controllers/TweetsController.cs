@@ -7,7 +7,10 @@ using System.Web.Mvc;
 namespace Twtter.Application.Controllers
 {
     using System.Data.Entity;
+    using Hubs;
+    using Microsoft.Ajax.Utilities;
     using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.SignalR;
     using Microsoft.Owin.Security.Provider;
     using Models;
     using PagedList;
@@ -61,14 +64,14 @@ namespace Twtter.Application.Controllers
                     tweets = tweets.OrderByDescending(t => t.DateCreated);
                     break;
                 default:
-                    tweets = tweets.OrderBy(t => t.Id);
+                    tweets = tweets.OrderByDescending(t => t.DateCreated);
                     break;
             }
 
             int pageSize = 3;
             int pageNumber = (model.Page ?? 1);
 
-            pageModel.Tweets = tweets;
+            pageModel.Tweets = tweets.ToPagedList(pageNumber, pageSize);
             pageModel.PageSize = pageSize;
             pageModel.PageNumber = pageNumber;
             pageModel.ActionName = "Index";
@@ -79,16 +82,33 @@ namespace Twtter.Application.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        public ActionResult GetPartialTweet(int? id)
+        {
+            var tweet = this.Data.Tweets.All()
+                .Where(t => t.Id == id)
+                .Select(t => new TweetOutputModel()
+                {
+                    Id = t.Id,
+                    Text = t.Text,
+                    Title = t.Title,
+                    AuthorId = t.UserId,
+                    AuthorName = t.User.UserName,
+                    DateCreated = t.DateCreated
+                })
+                .FirstOrDefault();
+
+            return this.PartialView(tweet);
+        }
+
+        [HttpGet]
+        [System.Web.Mvc.Authorize]
         public ActionResult Create()
         {
-            ViewBag.Title = "Create Tweet";
-
             return this.View();
         }
 
         [HttpPost]
-        [Authorize]
+        [System.Web.Mvc.Authorize]
         public ActionResult Create(TweetInputModel model)
         {
             if (this.ModelState != null && this.ModelState.IsValid )
@@ -104,11 +124,11 @@ namespace Twtter.Application.Controllers
                 this.Data.Tweets.Add(tweet);
                 this.Data.SaveChanges();
 
-                var tweetSaved = this.Data.Tweets.Find(t => t.Equals(tweet)).FirstOrDefault();
-                tweet.Url = GetBaseUrl() + "Tweets/" + tweetSaved.Id;
+                var hub = GlobalHost.ConnectionManager.GetHubContext<TweeterHub>();
+                hub.Clients.All.showTweet(tweet.Id);
 
-                this.Data.Tweets.Update(tweet);
-                this.Data.SaveChanges();
+
+                return this.RedirectToAction("Index", "Users");
             }
 
             return this.View(model);

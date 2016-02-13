@@ -1,0 +1,16 @@
+﻿@using Twtter.Application.Controllers;
+@model Twtter.Application.Models.UserOutputModel
+
+<div class="userProfileDiv" data-id="@Model.Id">
+    @Ajax.ActionLink(Model.UserName, "All", "Users",
+    new AjaxOptions
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "timeDisplay",
+        LoadingElementId = "timeDisplayLoading",
+        InsertionMode = InsertionMode.Replace
+    }, new { @class = "btn btn-primary" })
+
+    <div id="popup@(Model.Id)"></div>
+</div>
+

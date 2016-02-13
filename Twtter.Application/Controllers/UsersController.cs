@@ -10,11 +10,12 @@ namespace Twtter.Application.Controllers
     using Microsoft.AspNet.Identity;
     using Models;
     using Twitter.Data;
+
     [Authorize]
     public class UsersController : BaseController
     {
         public UsersController()
-            : this(new TwitterData(new TwitterDbContext()))
+            : base(new TwitterData(new TwitterDbContext()))
         {
 
         }
@@ -28,31 +29,51 @@ namespace Twtter.Application.Controllers
         public ActionResult Index(TweetsControllerModel model)
         {
             this.ViewBag.User = this.User.Identity.GetUserName();
+         
 
-            var tweetsControllerData = new TweetsControllerModel()
-            {
-                CurrentFilter = model.CurrentFilter,
-                SortOrder = model.SortOrder,
-                Page = model.Page
-            };
-
-            return View(tweetsControllerData);
+            return View(model);
         }
 
-        // GET: User
-//        public ActionResult Profile(string username)
-//        {
-//            var user = this.Data.Users.All().Where(u => u.UserName == username).FirstOrDefault();
-//            return this.View(user);
-//        }
+        public ActionResult All()
+        {
+            var users = this.Data.Users.All()
+                .Select(u => new UserOutputModel()
+                {
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    Email = u.Email,
+                    Picture = u.Picture
+                })
+                .ToList();
 
-//        public ActionResult GetFile()
-//        {
-//            var pers = new { 
-//                name = "Goshko",
-//                age = 12
-//            };
-//            return Json(pers, JsonRequestBehavior.AllowGet);
-//        }
+            return this.View(users);
+        }
+
+        [HttpGet]
+        public ActionResult GetUser(string id)
+        {
+            var user = this.Data.Users.All()
+                .Where(u => u.Id.Equals(id))
+                .Select(u => new UserOutputModel()
+                {
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    Email = u.Email,
+                    Picture = u.Picture
+                })
+                .FirstOrDefault();
+
+            if (user != null)
+            {
+                return this.PartialView("/DisplayTemplates/_UserPopup", user);
+            }
+
+            return null;
+        }
+
+        public ActionResult Profile(string userId)
+        {
+            return null;
+        }
     }
 }

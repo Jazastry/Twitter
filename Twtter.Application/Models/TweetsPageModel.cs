@@ -6,6 +6,7 @@ using System.Web;
 namespace Twtter.Application.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using PagedList;
 
     public class TweetsPageModel
     {
@@ -27,6 +28,6 @@ namespace Twtter.Application.Models
 
         public string ControllerName { get; set; }
 
-        public IEnumerable<TweetOutputModel> Tweets { get; set; } 
+        public IPagedList<TweetOutputModel> Tweets { get; set; } 
     }
 }

@@ -1,0 +1,26 @@
+﻿@model List<Twtter.Application.Models.UserOutputModel>
+
+<div id="allUsers">
+    @Html.DisplayFor(u => u);
+</div>
+           
+@section scripts
+    {
+    <script>
+        $('.userProfileDiv').hover(
+                function () {
+                    var id = $(this).attr('data-id');
+
+                    console.log('in' + id);
+
+                    $('#popup' + id).load('/Users/GetUser/' + id);
+                },
+                function () {
+                    var id = $(this).attr('data-id');
+
+                    console.log('out' + id);
+
+                    $('#popup' + id).hide();
+                });
+    </script>
+}

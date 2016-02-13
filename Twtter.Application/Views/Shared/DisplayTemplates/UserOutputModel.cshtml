@@ -1,0 +1,30 @@
+﻿@using Twtter.Application.Controllers;
+@model Twtter.Application.Models.UserOutputModel
+
+<div>
+    @Ajax.ActionLink(Model.UserName, "All", "Users",
+    new AjaxOptions
+    {
+        HttpMethod = "GET",
+        UpdateTargetId = "timeDisplay",
+        LoadingElementId = "timeDisplayLoading",
+        InsertionMode = InsertionMode.Replace
+    }, new { @class = "btn btn-primary", @id = "userPopup" + @Model.Id })
+
+    <div id="profileInfo@(Model.Id)"></div>
+    <div id="popup@(Model.Id)"></div>
+    @section Scripts
+    {
+        <script>
+            $('#userPopup@(Model.Id)').hover(
+                function() {
+                    console.log('ENTER');
+                    $('popup@(Model.Id)').load('/Users/GetUser/' + @Model.Id);
+                },
+                function() {
+                    $('popup@(Model.Id)').hide();
+                });
+        </script>
+    }
+</div>
+

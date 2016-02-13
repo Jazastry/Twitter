@@ -12,12 +12,12 @@ namespace Twtter.Application
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                name: "Users",
-                url: "{controller}/{action}/{username}",
-                defaults: new { controller = "Users", action = "Index", id = UrlParameter.Optional }
-            );
+//
+//            routes.MapRoute(
+//                name: "Users",
+//                url: "{controller}/{action}/{username}",
+//                defaults: new { controller = "Users", action = "Index", id = UrlParameter.Optional }
+//            );
 
             routes.MapRoute(
                 name: "Default",

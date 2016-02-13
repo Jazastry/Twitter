@@ -1,0 +1,10 @@
+﻿@model Twtter.Application.Models.MessageViewModel
+@{
+    string text = "";
+    if (Model != null)
+    {
+        text = Model.Text;
+    }
+}
+
+<div>@text</div>
